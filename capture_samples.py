@@ -7,7 +7,7 @@ from constants import FONT, FONT_POS, FONT_SIZE, FRAME_ACTIONS_PATH, ROOT_PATH
 from datetime import datetime
 
 
-def capture_samples(path, margin_frame=1, min_cant_frames=5, delay_frames=3):
+def capture_samples(path, margin_frame=2, min_cant_frames=5, delay_frames=2):
     '''
     ### CAPTURA DE MUESTRAS PARA UNA PALABRA
     Recibe como parámetro la ubicación de guardado y guarda los frames
@@ -24,6 +24,8 @@ def capture_samples(path, margin_frame=1, min_cant_frames=5, delay_frames=3):
     fix_frames = 0
     recording = False
     
+    samples_count = len([name for name in os.listdir(path) if os.path.isdir(os.path.join(path, name))])
+
     with Holistic() as holistic_model:
         video = cv2.VideoCapture(0)
         
@@ -52,12 +54,23 @@ def capture_samples(path, margin_frame=1, min_cant_frames=5, delay_frames=3):
                     output_folder = os.path.join(path, f"sample_{today}")
                     create_folder(output_folder)
                     save_frames(frames, output_folder)
+                    samples_count += 1
                 
                 recording, fix_frames = False, 0
                 frames, count_frame = [], 0
                 cv2.putText(image, 'Listo para capturar...', FONT_POS, FONT, FONT_SIZE, (0,220, 100))
             
             draw_keypoints(image, results)
+
+            # Agregar recuadro con el conteo de muestras
+            height, width, _ = image.shape # Obtener las dimensiones de la imagen
+            # Definir las coordenadas para el rectángulo en el costado derecho
+            top_left = (width - 200, 10)       # Punto superior izquierdo
+            bottom_right = (width - 10, 60)     # Punto inferior derecho
+            text_position = (top_left[0] + 10, top_left[1] + 40)
+            cv2.rectangle(image, top_left, bottom_right, (0, 0, 0), -1)
+            cv2.putText(image, f'Muestras: {samples_count}', text_position, FONT, FONT_SIZE, (255, 255, 255), 2)
+
             cv2.imshow(f'Toma de muestras para "{os.path.basename(path)}"', image)
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
@@ -66,6 +79,6 @@ def capture_samples(path, margin_frame=1, min_cant_frames=5, delay_frames=3):
         cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    word_name = "hola"
+    word_name = "mal"
     word_path = os.path.join(ROOT_PATH, FRAME_ACTIONS_PATH, word_name)
     capture_samples(word_path)
