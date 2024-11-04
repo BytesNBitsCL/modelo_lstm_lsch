@@ -6,8 +6,9 @@ from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 from helpers import get_word_ids, get_sequences_and_labels
 from constants import *
+import matplotlib.pyplot as plt
 
-def training_model(model_path, epochs=500):
+def training_model(model_path, epochs=234): # 500
     word_ids = get_word_ids(WORDS_JSON_PATH ) # ['word1', 'word2', 'word3]
     
     sequences, labels = get_sequences_and_labels(word_ids)
@@ -17,12 +18,36 @@ def training_model(model_path, epochs=500):
     X = np.array(sequences)
     y = to_categorical(labels).astype(int) 
     
-    early_stopping = EarlyStopping(monitor='accuracy', patience=10, restore_best_weights=True)
-    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.05, random_state=42)
+    early_stopping = EarlyStopping(monitor='accuracy', patience=30, restore_best_weights=True)
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=10)
     
     model = get_model(int(MODEL_FRAMES), len(word_ids))
-    model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=epochs, batch_size=8, callbacks=[early_stopping])
+    history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=epochs, batch_size=32) # callbacks=[early_stopping]
     
+    # Precisión de entrenamiento y validación
+    plt.figure(figsize=(12, 6))
+
+    # Gráfico de precisión
+    plt.subplot(1, 2, 1)
+    plt.plot(history.history['accuracy'], label='Precisión de Entrenamiento')
+    plt.plot(history.history['val_accuracy'], label='Precisión de Validación')
+    plt.title('Precisión en cada Época')
+    plt.xlabel('Épocas')
+    plt.ylabel('Precisión')
+    plt.legend()
+
+    # Gráfico de pérdida
+    plt.subplot(1, 2, 2)
+    plt.plot(history.history['loss'], label='Pérdida de Entrenamiento')
+    plt.plot(history.history['val_loss'], label='Pérdida de Validación')
+    plt.title('Pérdida en cada Época')
+    plt.xlabel('Épocas')
+    plt.ylabel('Pérdida')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
     model.summary()
     model.save(model_path)
 
