@@ -36,21 +36,21 @@ def draw_keypoints(image, results):
     '''
     Dibuja los keypoints en la imagen
     '''
-    draw_landmarks(
-        image,
-        results.face_landmarks,
-        FACEMESH_CONTOURS,
-        DrawingSpec(color=(80, 110, 10), thickness=1, circle_radius=1),
-        DrawingSpec(color=(80, 256, 121), thickness=1, circle_radius=1),
-    )
+    # draw_landmarks(
+    #     image,
+    #     results.face_landmarks,
+    #     FACEMESH_CONTOURS,
+    #     DrawingSpec(color=(80, 110, 10), thickness=1, circle_radius=1),
+    #     DrawingSpec(color=(80, 256, 121), thickness=1, circle_radius=1),
+    # )
     # Draw pose connections
-    draw_landmarks(
-        image,
-        results.pose_landmarks,
-        POSE_CONNECTIONS,
-        DrawingSpec(color=(80, 22, 10), thickness=2, circle_radius=4),
-        DrawingSpec(color=(80, 44, 121), thickness=2, circle_radius=2),
-    )
+    # draw_landmarks(
+    #     image,
+    #     results.pose_landmarks,
+    #     POSE_CONNECTIONS,
+    #     DrawingSpec(color=(80, 22, 10), thickness=2, circle_radius=4),
+    #     DrawingSpec(color=(80, 44, 121), thickness=2, circle_radius=2),
+    # )
     # Draw left hand connections
     draw_landmarks(
         image,
@@ -75,11 +75,11 @@ def save_frames(frames, output_folder):
 
 # CREATE KEYPOINTS
 def extract_keypoints(results):
-    pose = np.array([[res.x, res.y, res.z, res.visibility] for res in results.pose_landmarks.landmark]).flatten() if results.pose_landmarks else np.zeros(33*4)
-    face = np.array([[res.x, res.y, res.z] for res in results.face_landmarks.landmark]).flatten() if results.face_landmarks else np.zeros(468*3)
+    # pose = np.array([[res.x, res.y, res.z, res.visibility] for res in results.pose_landmarks.landmark]).flatten() if results.pose_landmarks else np.zeros(33*4)
+    # face = np.array([[res.x, res.y, res.z] for res in results.face_landmarks.landmark]).flatten() if results.face_landmarks else np.zeros(468*3)
     lh = np.array([[res.x, res.y, res.z] for res in results.left_hand_landmarks.landmark]).flatten() if results.left_hand_landmarks else np.zeros(21*3)
     rh = np.array([[res.x, res.y, res.z] for res in results.right_hand_landmarks.landmark]).flatten() if results.right_hand_landmarks else np.zeros(21*3)
-    return np.concatenate([pose, face, lh, rh])
+    return np.concatenate([lh, rh])
 
 def get_keypoints(model, sample_path):
     '''
@@ -118,5 +118,4 @@ def get_sequences_and_labels(words_id):
             seq_keypoints = [fila['keypoints'] for _, fila in df_sample.iterrows()]
             sequences.append(seq_keypoints)
             labels.append(word_index)
-                    
     return sequences, labels
