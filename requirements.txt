@@ -9,6 +9,4 @@ tensorflow==2.17.0
 Flask==3.0.2
 protobuf==4.25.3
 tables==3.9.2
-gTTS==2.5.1
-pygame==2.5.2
 PyQt5==5.15.9
