@@ -14,12 +14,22 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Peruana (LSP)
 - helpers.py → funciones que se utilizan en los scripts principales.
 
 ## Pasos para probar la red neuronal
-1. Capturar las muestras con capture_samples.py
-2. Normalizar las muestras con normalize_samples.py
-2. Generar los .h5 (keypoints) de cada palabra con create_keypoints.py
-3. Entrenar el modelo con training_model.py
-4. Realizar pruebas con evaluate_model.py
+1. Capturar las muestras con ```python capture_samples.py```
+2. Normalizar las muestras con ```python normalize_samples.py```
+2. Generar los .h5 (keypoints) de cada palabra con ```python create_keypoints.py```
+3. Entrenar el modelo con ```python training_model.py```
+4. Realizar pruebas con ```python evaluate_model.py```
 
 ## Video de la explicación del código:
 https://youtu.be/3EK0TxfoAMk
 Nota: Pronto subiré otro video explicando las mejoras.
+
+## INSTALAR DEPENDENCIAS
+```pip install -r requirements.txt```
+
+## DESINSTALAR DEPENDENCIAS
+```
+pip freeze > requirements_to_uninstall.txt
+pip uninstall -r requirements_to_uninstall.txt -y
+Remove-Item requirements_to_uninstall.txt
+```
