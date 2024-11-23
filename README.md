@@ -1,4 +1,5 @@
-Este es un modelo de una red neuronal que traduce Lengua de Señas Peruana (LSP) a texto (y voz). Utilicé MediaPipe para obtener los puntos de la seña y para el entrenamiento usé TensorFlow y Keras.
+# Este es un Fork del repositorio "modelo_lstm_lsp", creado por "ronvidev".
+Este es un modelo de una red neuronal que traduce Lengua de Señas Chilena (LSCh) a texto (y voz). Con el objetivo de ser utilizado en una aplicación web. Utilizamos MediaPipe para obtener los puntos de la seña (keypoints) y para el entrenamiento usamos TensorFlow y Keras.
 
 ## SCRIPTS PRINCIPALES
 - capture_samples.py → captura las muestras y las ubica en la carpeta frame_actions.
@@ -20,9 +21,12 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Peruana (LSP)
 3. Entrenar el modelo con ```python training_model.py```
 4. Realizar pruebas con ```python evaluate_model.py```
 
-## Video de la explicación del código:
+## Video de la explicación del código original (rama main - creado por ronvidev):
 https://youtu.be/3EK0TxfoAMk
 Nota: Pronto subiré otro video explicando las mejoras.
+
+## Observaciones
+Tener en consideración que utilizamos y es necesaria la versión Python 3.11 para que funcione todo correctamente.
 
 ## INSTALAR DEPENDENCIAS
 ```pip install -r requirements.txt```
