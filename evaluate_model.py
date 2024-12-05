@@ -8,7 +8,7 @@ from constants import *
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from text_to_speech import text_to_speech
 
-def interpolate_keypoints(keypoints, target_length=15):
+def interpolate_keypoints(keypoints, target_length=MODEL_FRAMES):
     current_length = len(keypoints)
     if current_length == target_length:
         return keypoints
@@ -27,7 +27,7 @@ def interpolate_keypoints(keypoints, target_length=15):
     
     return interpolated_keypoints
 
-def normalize_keypoints(keypoints, target_length=15):
+def normalize_keypoints(keypoints, target_length=MODEL_FRAMES):
     current_length = len(keypoints)
     if current_length < target_length:
         return interpolate_keypoints(keypoints, target_length)
@@ -37,10 +37,11 @@ def normalize_keypoints(keypoints, target_length=15):
         return [keypoints[i] for i in indices]
     else:
         return keypoints
-    
-def evaluate_model(src=None, threshold=0.8, margin_frame=1, delay_frames=3):
+
+def evaluate_model(src=None, threshold=0.7, margin_frame=2, delay_frames=2):
     kp_seq, sentence = [], []
     word_ids = get_word_ids(WORDS_JSON_PATH)
+
     model = load_model(MODEL_PATH)
     count_frame = 0
     fix_frames = 0
@@ -63,7 +64,6 @@ def evaluate_model(src=None, threshold=0.8, margin_frame=1, delay_frames=3):
                 if count_frame > margin_frame:
                     kp_frame = extract_keypoints(results)
                     kp_seq.append(kp_frame)
-            
             else:
                 if count_frame >= MIN_LENGTH_FRAMES + margin_frame:
                     fix_frames += 1
@@ -77,7 +77,6 @@ def evaluate_model(src=None, threshold=0.8, margin_frame=1, delay_frames=3):
                     print(np.argmax(res), f"({res[np.argmax(res)] * 100:.2f}%)")
                     if res[np.argmax(res)] > threshold:
                         word_id = word_ids[np.argmax(res)].split('-')[0]
-                        
                         sent = words_text.get(word_id)
                         sentence.insert(0, sent)
                         text_to_speech(sent) # ONLY LOCAL (NO SERVER)
@@ -99,6 +98,6 @@ def evaluate_model(src=None, threshold=0.8, margin_frame=1, delay_frames=3):
         video.release()
         cv2.destroyAllWindows()
         return sentence
-    
+
 if __name__ == "__main__":
     evaluate_model()

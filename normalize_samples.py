@@ -12,7 +12,7 @@ def read_frames_from_directory(directory):
             frames.append(frame)
     return frames
 
-def interpolate_frames(frames, target_frame_count=15):
+def interpolate_frames(frames, target_frame_count=MODEL_FRAMES):
     current_frame_count = len(frames)
     if current_frame_count == target_frame_count:
         return frames
@@ -28,7 +28,7 @@ def interpolate_frames(frames, target_frame_count=15):
     
     return interpolated_frames
 
-def normalize_frames(frames, target_frame_count=15):
+def normalize_frames(frames, target_frame_count=MODEL_FRAMES):
     current_frame_count = len(frames)
     if current_frame_count < target_frame_count:
         return interpolate_frames(frames, target_frame_count)
@@ -39,7 +39,7 @@ def normalize_frames(frames, target_frame_count=15):
     else:
         return frames
 
-def process_directory(word_directory, target_frame_count=15):
+def process_directory(word_directory, target_frame_count=MODEL_FRAMES):
     for sample_name in os.listdir(word_directory):
         sample_directory = os.path.join(word_directory, sample_name)
         if os.path.isdir(sample_directory):
@@ -75,6 +75,6 @@ if __name__ == "__main__":
     
     # sample_directory = r"E:\Data\LSP Project\RED NEURONAL\frame_actions\buenos_dias\sample_240113195007489206"
     # frames = read_frames_from_directory(sample_directory)
-    # normalized_frames = normalize_frames(frames, 15)
+    # normalized_frames = normalize_frames(frames, MODEL_FRAMES)
     # clear_directory(sample_directory)
     # save_normalized_frames(sample_directory, normalized_frames)
