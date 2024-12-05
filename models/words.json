@@ -1,6 +1,29 @@
 {
     "word_ids": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
         "hola",
-        "como_estas"
+        "buenos_dias",
+        "buenas_tardes",
+        "buenas_noches",
+        "como_estas",
+        "bien",
+        "mal",
+        "gracias",
+        "tienes",
+        "tengo",
+        "perro",
+        "gato",
+        "cerdo",
+        "pez",
+        "vaca",
+        "pollo",
+        "blanco",
+        "negro",
+        "rojo",
+        "azul"
     ]
 }

@@ -17,7 +17,7 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Chilena (LSCh
 ## Pasos para probar la red neuronal
 1. Capturar las muestras con ```python capture_samples.py```
 2. Normalizar las muestras con ```python normalize_samples.py```
-2. Generar los .h5 (keypoints) de cada palabra con ```python create_keypoints.py```
+2. Generar los .h5 (keypoints) de cada palabra y crear un promedio de los mismos con ```python average_keypoints.py```
 3. Entrenar el modelo con ```python training_model.py```
 4. Realizar pruebas con ```python evaluate_model.py```
 
