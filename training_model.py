@@ -8,8 +8,8 @@ from helpers import get_word_ids, get_sequences_and_labels
 from constants import *
 import matplotlib.pyplot as plt
 
-def training_model(model_path, epochs=234): # 500
-    word_ids = get_word_ids(WORDS_JSON_PATH ) # ['word1', 'word2', 'word3]
+def training_model(model_path, model_path2, epochs=213): # 500
+    word_ids = get_word_ids(WORDS_JSON_PATH) # ['word1', 'word2', 'word3]
     
     sequences, labels = get_sequences_and_labels(word_ids)
     
@@ -49,8 +49,9 @@ def training_model(model_path, epochs=234): # 500
     plt.show()
 
     model.summary()
+    model.save(model_path2)
     model.save(model_path)
 
 if __name__ == "__main__":
-    training_model(MODEL_PATH)
+    training_model(MODEL_PATH, MODEL_PATH2)
     
