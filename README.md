@@ -21,9 +21,11 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Chilena (LSCh
 3. Entrenar el modelo con ```python training_model.py```
 4. Realizar pruebas con ```python evaluate_model.py```
 
+## Exportar el modelo para usar en la web
+Se puede exportar el modelo para ser utilizado en aplicaciones web, para eso ve más información en el README.MD de la carpeta "exporting_model".
+
 ## Video de la explicación del código original (rama main - creado por ronvidev):
 https://youtu.be/3EK0TxfoAMk
-Nota: Pronto subiré otro video explicando las mejoras.
 
 ## Observaciones
 Tener en consideración que utilizamos y es necesaria la versión Python 3.11 para que funcione todo correctamente.
