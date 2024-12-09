@@ -25,7 +25,7 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Chilena (LSCh
 ## Exportar el modelo para usar en la web
 Se puede exportar el modelo para ser utilizado en aplicaciones web, para eso ve más información en el README.MD de la carpeta "exporting_model".
 
-## Video de la explicación del código original (rama main - creado por ronvidev):
+## Video de la explicación del código original (creado por ronvidev):
 https://youtu.be/3EK0TxfoAMk
 
 ## Observaciones
