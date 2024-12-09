@@ -32,7 +32,7 @@ words_text = {
     "buenos_dias": "BUENOS DÍAS",
     "buenas_tardes": "BUENAS TARDES",
     "buenas_noches": "BUENAS NOCHES",
-    "como_estas": "COMO ESTÁS",
+    "como_estas": "CÓMO ESTÁS",
     "bien": "BIEN",
     "mal": "MAL",
     "gracias": "GRACIAS",
