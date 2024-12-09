@@ -5,6 +5,7 @@ Este es un modelo de una red neuronal que traduce Lengua de Señas Chilena (LSCh
 - capture_samples.py → captura las muestras y las ubica en la carpeta frame_actions.
 - normalize_samples.py → normaliza las muestras para que todas tengan la misma cantidad de frames (importante).
 - create_keypoints.py → crea los keypoints que se usarán en el entrenamiento.
+- average_keypoints.py → mejora del script "create_keypoints" donde se crea los keypoints que se usarán en el entrenamiento y además crea un promedio de los mismos, que luego se utilizarán en el feedback del usuario.
 - training_model.py → entrena la red neuronal.
 - evaluate_model.py → donde se realiza la prueba de la red neuronal.
 - main.py → donde se utiliza una GUI para usar el traductor.
